@@ -1,0 +1,81 @@
+<ui:composition template="template.xhtml"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+  <ui:define name="content">
+
+    <p:panel id="panelModificacion" header="#{modificaVehiculoBean.titulo}"
+             style="text-align: center;">
+      <h:panelGrid columns="3" cellpadding="4"
+                    style="margin-left: auto; margin-right: auto;">
+        <p:outputLabel value="Vehículo: " indicateRequired="true" />
+        <p:selectOneMenu value="#{modificaVehiculoBean.idSeleccionado}"
+                         required="#{not empty param.combo}">
+          <f:selectItem itemLabel="Seleccione" />
+          <f:selectItems value="#{modificaVehiculoBean.datosCombo}"
+                         var="vehiculo" itemLabel="#{vehiculo.formatoCombo}"
+                         itemValue="#{vehiculo.id}" />
+          <p:ajax event="valueChange" update="panelModificacion" />
+        </p:selectOneMenu>
+
+        <p:commandButton value="Buscar" styleClass="classBlock"
+                          action="#{modificaVehiculoBean.consultarVehiculo}"
+                          update="panelModificacion">
+          <f:param name="combo" value="true" />
+        </p:commandButton>
+      </h:panelGrid>
+
+      <p:panel id="panelDatosVehiculo"
+               rendered="#{modificaVehiculoBean.vehiculo != null}">
+        <h:panelGrid columns="2" cellpadding="4"
+                    style="margin-left: auto; margin-right: auto;">
+          <p:outputLabel value="Patente: " indicateRequired="true" />
+          <p:inputText id="patente"
+                       value="#{modificaVehiculoBean.vehiculo.patente}"
+                       required="#{not empty param.datos}" />
+
+          <p:outputLabel value="Año: " indicateRequired="true" />
+          <p:inputText id="anio" required="#{not empty param.datos}"
+                       value="#{modificaVehiculoBean.vehiculo.anio}" />
+                   
+          <p:outputLabel value="Marca: " indicateRequired="true" />
+          <p:inputText id="marca" required="#{not empty param.datos}"
+                       value="#{modificaVehiculoBean.vehiculo.marca}" />
+
+          <p:outputLabel value="Modelo: " indicateRequired="true" />
+          <p:inputText id="modelo" required="#{not empty param.datos}"
+                       value="#{modificaVehiculoBean.vehiculo.modelo}" />
+
+          <p:outputLabel value="Tipo de Uso: " indicateRequired="true" />
+          <p:inputText id="tipoUso" required="#{not empty param.datos}"
+                                    value="#{modificaVehiculoBean.vehiculo.tipoUso}" />
+                                    
+                                    <h:outputLabel for="propietario" value="Propietario:" />
+                                    <p:selectOneMenu id="propietario" value="#{modificaVehiculoBean.vehiculo.propietario}" converter="personaConverter">
+                                      <f:selectItem itemLabel="Seleccione un propietario" itemValue="" />
+                                      <f:selectItems value="#{modificaVehiculoBean.personas}" var="persona" itemLabel="#{persona.nombre} #{persona.apellido}" itemValue="#{persona}" />
+                                    </p:selectOneMenu>
+                                  
+
+
+        </h:panelGrid>
+      </p:panel>
+      <p:messages id="messages" showDetail="true" /> <p:toolbar>
+        <p:toolbarGroup align="right">
+          <p:commandButton value="Modificar" styleClass="classBlock"
+                            update="panelModificacion"
+                            disabled="#{modificaVehiculoBean.vehiculo == null}"
+                            action="#{modificaVehiculoBean.modificarVehiculo}">
+            <f:param name="datos" value="true" />
+          </p:commandButton>
+          <p:spacer width="20" />
+          <p:commandButton value="Volver" immediate="true"
+                            styleClass="classBlock" action="#{modificaVehiculoBean.volver}" />
+        </p:toolbarGroup>
+      </p:toolbar>
+    </p:panel>
+
+  </ui:define>
+</ui:composition>

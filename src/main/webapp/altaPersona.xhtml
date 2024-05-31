@@ -1,0 +1,56 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<p:panel id="panelDatosAlta" header="#{altaPersonaBean.titulo}"
+			style="text-align: center;">
+			<h:panelGrid columns="2" cellpadding="4"
+				style="margin-left: auto; margin-right: auto;">
+				<p:outputLabel value="Nombre: " indicateRequired="true" />
+				<p:inputText id="nombre" value="#{altaPersonaBean.persona.nombre}"
+					required="true" />
+
+				<p:outputLabel value="Apellido: " indicateRequired="true" />
+				<p:inputText id="apellido" required="true"
+					value="#{altaPersonaBean.persona.apellido}" />
+
+					<p:outputLabel value="Fecha de Nacimiento: " for="fechaNacimiento" />
+					<p:calendar id="fechaNacimiento" value="#{altaPersonaBean.persona.fechaNacimiento}" pattern="dd-MM-yyyy">
+					  <f:convertDateTime pattern="dd-MM-yyyy" />
+					</p:calendar>
+					
+				<h:outputLabel for="dni" value="DNI:" />
+	<h:inputText id="dni" value="#{altaPersonaBean.persona.dni}" required="true">
+    <f:convertNumber integerOnly="true" />
+	<f:validateLongRange minimum="1" maximum="99999999" />
+                        <f:validateLength minimum="7" maximum="8" />
+</h:inputText>
+				<h:outputLabel for="sexo" value="Sexo:" />
+				<h:selectOneRadio id="sexo" value="#{altaPersonaBean.persona.sexo}" required="true">
+					<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+				</h:selectOneRadio>
+
+				<h:outputLabel for="domicilio" value="Domicilio:" />
+				<h:inputText id="domicilio" value="#{altaPersonaBean.persona.domicilio}" required="true" />
+			</h:panelGrid>
+
+			<p:toolbar>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Aceptar" update="panelDatosAlta"
+						action="#{altaPersonaBean.guardarPersona}" styleClass="classBlock" />
+					<p:spacer width="20" />
+					<p:commandButton value="Volver" immediate="true"
+						styleClass="classBlock" action="#{altaPersonaBean.volver}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+      <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

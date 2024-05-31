@@ -1,0 +1,15 @@
+.ui-inputfield.ui-state-error, .ui-widget-header .ui-inputfield.ui-state-error,
+	.ui-widget-content .ui-inputfield.ui-state-error {
+	color: #333333;
+	border: 1px solid #f5546c;
+}
+ .logo-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .logo {
+      max-width: 100%;
+      max-height: 100px;
+      vertical-align: middle;
+    }

@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="panelConsulta" header="#{consultaPersonaBean.titulo}"
+		style="text-align: center;">
+		<h:panelGrid columns="2" cellpadding="4"
+			style="margin-left: auto; margin-right: auto;">
+			
+			<p:outputLabel value="Persona: " indicateRequired="true" />
+			<p:selectOneMenu value="#{consultaPersonaBean.idSeleccionado}"
+				required="#{not empty param.combo}">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{consultaPersonaBean.datosCombo}"
+					var="persona" itemLabel="#{persona.formatoCombo}"
+					itemValue="#{persona.id}" />
+				<p:ajax event="valueChange" update="panelConsulta" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+		<p:panel id="panelDatosPersona"
+			rendered="#{consultaPersonaBean.persona != null}">
+			<h:panelGrid columns="2" cellpadding="4"
+				style="margin-left: auto; margin-right: auto;">
+				<p:outputLabel value="Nombre: " />
+				<p:inputText id="nombre" readonly="true"
+					value="#{consultaPersonaBean.persona.nombre}" />
+
+					<p:outputLabel value="Apellido: " />
+				<p:inputText id="apellido" readonly="true"
+					value="#{consultaPersonaBean.persona.apellido}" />
+
+					<p:outputLabel value="DNI: "  />
+					<p:inputText id="dni" readonly="true"
+					 value="#{consultaPersonaBean.persona.dni}" />
+
+					 <p:outputLabel value="Sexo: "  />
+					<p:inputText id="sexo" readonly="true"
+					 value="#{consultaPersonaBean.persona.sexo}" />
+
+					<p:outputLabel value="Fecha de Nacimiento:" />
+					<p:inputText id="fechaNacimiento" readonly="true"
+					value="#{consultaPersonaBean.persona.fechaNacimiento}" />
+
+				
+					<p:outputLabel value="Domicilio: " />
+					<p:inputText id="domicilio" readonly="true"
+						value="#{consultaPersonaBean.persona.domicilio}" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:toolbar>
+			<p:toolbarGroup align="right">
+				<p:commandButton value="Consultar" styleClass="classBlock"
+					action="#{consultaPersonaBean.consultarPersona}"
+					update="panelConsulta">
+					<f:param name="combo" value="true" />
+				</p:commandButton>
+				<p:spacer width="20" />
+				<p:commandButton value="Volver" immediate="true"
+					styleClass="classBlock" action="#{consultaPersonaBean.volver}" />
+			</p:toolbarGroup>
+		</p:toolbar>
+	</p:panel>
+
+</ui:composition>

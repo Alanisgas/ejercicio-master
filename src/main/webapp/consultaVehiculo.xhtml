@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:panel id="panelConsulta" header="#{consultaVehiculoBean.titulo}" style="text-align: center;">
+        <h:panelGrid columns="2" cellpadding="4" style="margin-left: auto; margin-right: auto;">
+            <p:outputLabel value="Vehiculo: " />
+            <p:selectOneMenu value="#{consultaVehiculoBean.idSeleccionado}" required="true">
+                <f:selectItem itemLabel="Seleccione" />
+                <f:selectItems value="#{consultaVehiculoBean.datosCombo}" var="vehiculo"
+                    itemLabel="#{vehiculo.formatoCombo}" itemValue="#{vehiculo.id}" />
+                <p:ajax event="change" listener="#{consultaVehiculoBean.consultarVehiculo}" update="panelConsulta panelDatosVehiculo" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+        <p:panel id="panelDatosVehiculo" rendered="#{not empty consultaVehiculoBean.vehiculo}">
+            <h:panelGrid columns="2" cellpadding="4" style="margin-left: auto; margin-right: auto;">
+                <p:outputLabel value="Patente: " />
+                <p:inputText id="patente" readonly="true" value="#{consultaVehiculoBean.vehiculo.patente}" />
+
+                <p:outputLabel value="Año: " />
+                <p:inputText id="anio" readonly="true" value="#{consultaVehiculoBean.vehiculo.anio}" />
+
+                <p:outputLabel value="Marca: " />
+                <p:inputText id="marca" readonly="true" value="#{consultaVehiculoBean.vehiculo.marca}" />
+
+                <p:outputLabel value="Modelo: " />
+                <p:inputText id="modelo" readonly="true" value="#{consultaVehiculoBean.vehiculo.modelo}" />
+
+                <p:outputLabel value="Color: " />
+                <p:inputText id="color" readonly="true" value="#{consultaVehiculoBean.vehiculo.color}" />
+
+                <p:outputLabel value="Tipo de Uso: " />
+                <p:inputText id="tipoUso" readonly="true" value="#{consultaVehiculoBean.vehiculo.tipoUso}" />
+                <p:outputLabel value="El Propietario: " />
+                <p:outputLabel id="propietario" value="#{consultaVehiculoBean.vehiculo.propietario.nombre} #{consultaVehiculoBean.vehiculo.propietario.apellido}" />
+            </h:panelGrid>
+        </p:panel>
+
+        <p:toolbar>
+            <p:toolbarGroup align="right">
+                <p:commandButton value="Consultar" action="#{consultaVehiculoBean.consultarVehiculo}" update="panelConsulta panelDatosVehiculo" />
+                <p:spacer width="20" />
+                <p:commandButton value="Volver" immediate="true" action="#{consultaVehiculoBean.volver}" />
+            </p:toolbarGroup>
+        </p:toolbar>
+    </p:panel>
+
+</ui:composition>

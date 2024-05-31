@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+    version="2.3">
+     
+   <application>
+     <converter>
+        <converter-id>personaConverter</converter-id>
+        <converter-class>ar.com.lemondata.ejercicio.utils.PersonaConverter</converter-class>
+    </converter>
+</application>
+    <!-- Regla de navegación para alta de vehículos -->
+    <navigation-rule>
+        <from-view-id>/altaVehiculo.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>altaVehiculo</from-outcome>
+            <to-view-id>/altaVehiculo.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Regla de navegación para consulta de vehículos -->
+    <navigation-rule>
+        <from-view-id>/consultaV.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultaVehiculos</from-outcome>
+            <to-view-id>/consultaV.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Regla de navegación para modificación de vehículos -->
+    <navigation-rule>
+        <from-view-id>/modificaVehiculo.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>modificaVehiculo</from-outcome>
+            <to-view-id>/modificaVehiculo.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Regla de navegación para eliminar vehículos -->
+    <navigation-rule>
+        <from-view-id>/eliminarVehiculo.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>eliminarVehiculo</from-outcome>
+            <to-view-id>/eliminarVehiculo.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+      
+
+</faces-config>

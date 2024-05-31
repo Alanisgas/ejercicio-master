@@ -1,0 +1,18 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:tabView id="consultas" dynamic="true" effect="fade" effectDuration="fast" style="height: 100%;">
+			<p:tab title="Búsqueda por Combo" id="tabBusqueda">
+				<ui:include src="consultaPersona.xhtml" />
+			</p:tab>
+			<p:tab title="Búsqueda por Nombre" id="tabBusquedaNombre" >
+				<ui:include src="consultaPersonaNombre.xhtml" />
+			</p:tab>
+		</p:tabView>
+	</ui:define>
+</ui:composition>

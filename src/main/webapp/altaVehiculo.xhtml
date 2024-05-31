@@ -1,0 +1,60 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+
+		<p:panel id="panelDatosAlta" header="#{altaVehiculoBean.titulo}"
+			style="text-align: center;">
+			<h:panelGrid columns="2" cellpadding="4"
+				style="margin-left: auto; margin-right: auto;">
+				<p:outputLabel value="Patente: " indicateRequired="true" />
+				<p:inputText id="patente" value="#{altaVehiculoBean.vehiculo.patente}"
+					required="true" />
+
+				<p:outputLabel value="Año: " indicateRequired="true" />
+				<p:inputText id="anio" required="true"
+					value="#{altaVehiculoBean.vehiculo.anio}">
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+
+                <p:outputLabel value="Marca: " indicateRequired="true" />
+                <p:inputText id="marca" required="true"
+                    value="#{altaVehiculoBean.vehiculo.marca}" />
+
+                <p:outputLabel value="Modelo: " indicateRequired="true" />
+                <p:inputText id="modelo" required="true"
+                    value="#{altaVehiculoBean.vehiculo.modelo}" />
+					
+                <p:outputLabel value="Color: " indicateRequired="true" />
+                <p:inputText id="color" required="true"
+                    value="#{altaVehiculoBean.vehiculo.color}" />
+
+                <p:outputLabel value="Tipo de Uso: " indicateRequired="true" />
+                <p:inputText id="tipoUso" required="true"
+                    value="#{altaVehiculoBean.vehiculo.tipoUso}" />
+
+					<h:outputLabel for="propietario" value="Propietario:" />
+				<p:selectOneMenu id="propietario" value="#{altaVehiculoBean.vehiculo.propietario}" converter="personaConverter">
+					<f:selectItem itemLabel="Seleccione un propietario" itemValue="" />
+					<f:selectItems value="#{altaVehiculoBean.personas}" var="persona" itemLabel="#{persona.nombre} #{persona.apellido}" itemValue="#{persona}" />
+				</p:selectOneMenu>
+				
+			</h:panelGrid>
+
+			<p:toolbar>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Aceptar" update="panelDatosAlta messages"
+						action="#{altaVehiculoBean.guardarVehiculo}" styleClass="classBlock" />
+					<p:spacer width="20" />
+					<p:commandButton value="Volver" immediate="true"
+						styleClass="classBlock" action="#{altaVehiculoBean.volver}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" showSummary="false" />
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

@@ -16,6 +16,7 @@ import ar.com.lemondata.ejercicio.entity.Persona;
 import ar.com.lemondata.ejercicio.entity.Vehiculo;
 import ar.com.lemondata.ejercicio.servicioImpl.ServicioPersonaImpl;
 import ar.com.lemondata.ejercicio.servicioImpl.ServicioVehiculoImpl;
+
 @Named("modificaVehiculoBean")
 @ViewScoped
 public class ModificaVehiculoBean extends GenericBean {
@@ -24,23 +25,23 @@ public class ModificaVehiculoBean extends GenericBean {
 
     private Long idSeleccionado;
     private List<DatosVehiculo> datosCombo;
-        private List<Persona> personas;
+    private List<Persona> personas;
 
     private Vehiculo vehiculo;
 
     @Autowired
     private ServicioVehiculoImpl servicioVehiculo;
-      @Autowired
+    @Autowired
     private ServicioPersonaImpl servicioPersona;
+
     @PostConstruct
     private void init() {
-		setDatosCombo(servicioVehiculo.obtenerDatosComboVehiculo());
-        setIdSeleccionado(null); 
+        setDatosCombo(servicioVehiculo.obtenerDatosComboVehiculo());
+        setIdSeleccionado(null);
         setVehiculo(null);
         personas = servicioPersona.obtenerTodasLasPersonas();
     }
 
-    
     public List<Persona> getPersonas() {
         return personas;
     }
@@ -81,7 +82,6 @@ public class ModificaVehiculoBean extends GenericBean {
         this.vehiculo = vehiculo;
     }
 
-
     public void consultarVehiculo() {
         if (idSeleccionado != null) {
             vehiculo = servicioVehiculo.buscarVehiculoXId(idSeleccionado);
@@ -92,15 +92,15 @@ public class ModificaVehiculoBean extends GenericBean {
         if (vehiculo == null) {
             return; // No hay vehículo para modificar
         }
-    
+
         servicioVehiculo.guardarVehiculo(vehiculo);
-        
-        // Actualizo para impactar la modificacion 
+
+        // Actualizo para impactar la modificacion
         init();
-        
+
         mostrarMensajeExito("Vehículo modificado con éxito");
     }
-    
+
     private void mostrarMensajeExito(String mensaje) {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, mensaje, null));

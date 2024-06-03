@@ -9,3 +9,6 @@ VALUES ('Pedro', 'Sanchez', '1972-02-29', 34567890, 'Masculino', 'Algún Domicil
 
 INSERT INTO vehiculos (patente, anio, marca, modelo, color, tipo_uso, propietario_id)
 VALUES ('ABC123', 2020, 'Toyota', 'Corolla', 'Blanco', 'Personal', 1);
+
+INSERT INTO vehiculos (patente, anio, marca, modelo, color, tipo_uso, propietario_id)
+VALUES ('DEF456', 2021, 'Renoult', 'Clio', 'Negro', 'Personal', 2);

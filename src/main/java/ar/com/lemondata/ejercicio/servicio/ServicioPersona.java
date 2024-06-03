@@ -20,6 +20,10 @@ public interface ServicioPersona {
 	public List<DatosPersona> obtenerDatosComboPersona();
 
 	public void eliminarPersona(Long id);
+
+	List<Persona> buscarTodasLasPersonas();
+	
+	Persona actualizarPersona(Persona persona);
 	
 
 }

@@ -14,8 +14,6 @@ import ar.com.lemondata.ejercicio.entity.DatosVehiculo;
 import ar.com.lemondata.ejercicio.entity.Vehiculo;
 import ar.com.lemondata.ejercicio.repository.VehiculoRepository;
 import ar.com.lemondata.ejercicio.servicio.ServicioVehiculo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Implementacion del Servicio Vehiculo
@@ -23,11 +21,10 @@ import org.slf4j.LoggerFactory;
 @SessionScope
 @Service
 public class ServicioVehiculoImpl implements ServicioVehiculo {
-    private static final Logger logger = LoggerFactory.getLogger(ServicioVehiculoImpl.class);
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
-    
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -36,13 +33,7 @@ public class ServicioVehiculoImpl implements ServicioVehiculo {
     }
 
     public List<Vehiculo> buscarVehiculoXPatente(String patente) {
-        logger.info("Buscando vehículos en la base de datos con patente que contiene: {}", patente);
-        String queryString = "SELECT v FROM VEHICULOS v WHERE v.patente LIKE :patente";
-        List<Vehiculo> vehiculos = entityManager.createQuery(queryString, Vehiculo.class)
-                                                .setParameter("patente", "%" + patente + "%")
-                                                .getResultList();
-        logger.info("Número de vehículos encontrados: {}", vehiculos.size());
-        return vehiculos;
+        return vehiculoRepository.findByPatenteContainingIgnoreCase(patente);
     }
 
     public Vehiculo buscarVehiculoXId(Long id) {
@@ -57,10 +48,12 @@ public class ServicioVehiculoImpl implements ServicioVehiculo {
     public void eliminarVehiculo(Long vehiculoId) {
         vehiculoRepository.deleteById(vehiculoId);
     }
-     public List<Vehiculo> obtenerTodosLosVehiculos() {
+
+    public List<Vehiculo> obtenerTodosLosVehiculos() {
         return vehiculoRepository.findAll();
     }
+
     public List<DatosVehiculo> obtenerDatosComboPersona() {
-		return vehiculoRepository.findAllProjectedBy();
-	}
+        return vehiculoRepository.findAllProjectedBy();
+    }
 }

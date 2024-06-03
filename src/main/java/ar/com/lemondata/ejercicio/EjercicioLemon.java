@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Fernando
- * Clase Principal de la App.
+ *         Clase Principal de la App.
  */
 @SpringBootApplication
 public class EjercicioLemon {

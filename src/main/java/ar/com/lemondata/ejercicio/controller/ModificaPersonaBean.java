@@ -81,24 +81,21 @@ public class ModificaPersonaBean extends GenericBean {
 		if (persona == null) {
 			return;
 		}
-		
-	
 		if (persona.getFechaNacimiento() != null && persona.getFechaNacimiento() instanceof java.util.Date) {
 			java.util.Date utilDate = (java.util.Date) persona.getFechaNacimiento();
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 			persona.setFechaNacimiento(sqlDate);
 		}
-	
-		// Guardar la persona
+
+		// Guardo la persona
 		servicio.guardarPersona(persona);
-		
+
 		// Refresco la interfaz de usuario
 		init();
-		
-		// Mostrar mensaje de éxito
+
 		mostrarMensajeExito("Persona modificada con éxito");
 	}
-	
+
 	private void mostrarMensajeExito(String mensaje) {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, mensaje, null));

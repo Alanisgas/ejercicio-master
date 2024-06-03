@@ -27,33 +27,31 @@ public class Persona implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "persona_id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "persona_nombre", nullable = false, length = 80)
 	private String nombre;
 
 	@Column(name = "persona_apellido", nullable = false, length = 80)
 	private String apellido;
-	
+
 	@Column(name = "fecha_nacimiento", nullable = false)
-    private Date fechaNacimiento;
- 
-	 @Column(name = "dni", nullable = false, length = 8)
-    private Integer dni;
+	private Date fechaNacimiento;
+
+	@Column(name = "dni", nullable = false, length = 8)
+	private Integer dni;
 
 	@Enumerated(EnumType.STRING)
-    @Column(name = "sexo", nullable = false)
-    private Sexo sexo;
+	@Column(name = "sexo", nullable = false)
+	private Sexo sexo;
 
-
-    @Column(name = "domicilio", nullable = true)
-    private String domicilio;
-
-
+	@Column(name = "domicilio", nullable = true)
+	private String domicilio;
 
 	public Persona() {
 		super();
-		
+
 	}
+
 	public enum Sexo {
 		Masculino,
 		Femenino
@@ -90,7 +88,7 @@ public class Persona implements Serializable {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
- 
+
 	public Integer getDni() {
 		return dni;
 	}
@@ -114,19 +112,20 @@ public class Persona implements Serializable {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Persona persona = (Persona) o;
-        return Objects.equals(id, persona.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Persona persona = (Persona) o;
+		return Objects.equals(id, persona.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
 }

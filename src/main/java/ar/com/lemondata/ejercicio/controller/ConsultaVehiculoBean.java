@@ -27,7 +27,7 @@ public class ConsultaVehiculoBean extends GenericBean {
     private Long idSeleccionado;
     private List<DatosVehiculo> datosCombo;
     private Vehiculo vehiculo;
-    private String patenteConsulta; 
+    private String patenteConsulta;
     private List<Vehiculo> resultados;
 
     @Autowired
@@ -38,7 +38,7 @@ public class ConsultaVehiculoBean extends GenericBean {
         setDatosCombo(servicio.obtenerDatosComboVehiculo());
         setIdSeleccionado(null);
         setVehiculo(null);
-        
+
     }
 
     public String getTitulo() {
@@ -90,33 +90,33 @@ public class ConsultaVehiculoBean extends GenericBean {
     }
 
     public void consultarVehiculo() {
-    if (idSeleccionado != null) {
-        try {
-            Vehiculo vehiculo = servicio.buscarVehiculoXId(getIdSeleccionado());
-            if (vehiculo != null) {
-                setVehiculo(vehiculo);
-                mostrarMensaje("Vehículo encontrado: " + vehiculo.getPatente());
-            } else {
-                mostrarMensaje("No se encontró ningún vehículo con el ID proporcionado.");
+        if (idSeleccionado != null) {
+            try {
+                Vehiculo vehiculo = servicio.buscarVehiculoXId(getIdSeleccionado());
+                if (vehiculo != null) {
+                    setVehiculo(vehiculo);
+                    mostrarMensaje("Vehículo encontrado: " + vehiculo.getPatente());
+                } else {
+                    mostrarMensaje("No se encontró ningún vehículo con el ID proporcionado.");
+                }
+            } catch (Exception e) {
+                mostrarMensajeError("Ocurrió un error al consultar el vehículo: " + e.getMessage());
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            mostrarMensajeError("Ocurrió un error al consultar el vehículo: " + e.getMessage());
-            e.printStackTrace(); 
+        } else {
+            mostrarMensaje("Debe seleccionar un ID válido para la consulta.");
         }
-    } else {
-        mostrarMensaje("Debe seleccionar un ID válido para la consulta.");
     }
-}
 
-public void mostrarMensaje(String mensaje) {
-    FacesContext context = FacesContext.getCurrentInstance();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", mensaje);
-    context.addMessage(null, facesMessage);
-}
+    public void mostrarMensaje(String mensaje) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", mensaje);
+        context.addMessage(null, facesMessage);
+    }
 
-private void mostrarMensajeError(String mensaje) {
-    FacesContext context = FacesContext.getCurrentInstance();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", mensaje);
-    context.addMessage(null, facesMessage);
-}
+    private void mostrarMensajeError(String mensaje) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", mensaje);
+        context.addMessage(null, facesMessage);
+    }
 }

@@ -30,7 +30,7 @@ public class ConsultaPersonaBean extends GenericBean {
 	private List<DatosPersona> datosCombo;
 	private Persona persona;
 	private String nombreConsulta;
-    private List<Persona> resultados;
+	private List<Persona> resultados;
 
 	@Autowired
 	private ServicioPersonaImpl servicio;
@@ -54,23 +54,21 @@ public class ConsultaPersonaBean extends GenericBean {
 		return idSeleccionado;
 	}
 
-    public String getNombreConsulta() {
-        return nombreConsulta;
-    }
+	public String getNombreConsulta() {
+		return nombreConsulta;
+	}
 
-    public void setNombreConsulta(String nombreConsulta) {
-        this.nombreConsulta = nombreConsulta;
-    }
+	public void setNombreConsulta(String nombreConsulta) {
+		this.nombreConsulta = nombreConsulta;
+	}
 
-    public List<Persona> getResultados() {
-        return resultados;
-    }
+	public List<Persona> getResultados() {
+		return resultados;
+	}
 
-    public void setResultados(List<Persona> resultados) {
-        this.resultados = resultados;
-    }
-
-   
+	public void setResultados(List<Persona> resultados) {
+		this.resultados = resultados;
+	}
 
 	public void setIdSeleccionado(Long idSeleccionado) {
 		this.idSeleccionado = idSeleccionado;
@@ -92,36 +90,34 @@ public class ConsultaPersonaBean extends GenericBean {
 		this.persona = persona;
 	}
 
+	public void consultarPersona() {
+		if (idSeleccionado != null) {
+			try {
+				Persona persona = servicio.buscarPersonaXId(getIdSeleccionado());
+				if (persona != null) {
+					setPersona(persona);
+					mostrarMensaje("Persona encontrada: " + persona.getNombre());
+				} else {
+					mostrarMensaje("No se encontró ninguna persona con el ID proporcionado.");
+				}
+			} catch (Exception e) {
+				mostrarMensajeError("Ocurrió un error al consultar la persona: " + e.getMessage());
+				e.printStackTrace();
+			}
+		} else {
+			mostrarMensaje("Debe seleccionar un ID válido para la consulta.");
+		}
+	}
 
-public void consultarPersona() {
-    if (idSeleccionado != null) {
-        try {
-            Persona persona = servicio.buscarPersonaXId(getIdSeleccionado());
-            if (persona != null) {
-                setPersona(persona);
-                mostrarMensaje("Persona encontrada: " + persona.getNombre());
-            } else {
-                mostrarMensaje("No se encontró ninguna persona con el ID proporcionado.");
-            }
-        } catch (Exception e) {
-            mostrarMensajeError("Ocurrió un error al consultar la persona: " + e.getMessage());
-            e.printStackTrace(); 
-        }
-    } else {
-        mostrarMensaje("Debe seleccionar un ID válido para la consulta.");
-    }
-}
+	public void mostrarMensaje(String mensaje) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", mensaje);
+		context.addMessage(null, facesMessage);
+	}
 
-public void mostrarMensaje(String mensaje) {
-    FacesContext context = FacesContext.getCurrentInstance();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", mensaje);
-    context.addMessage(null, facesMessage);
+	private void mostrarMensajeError(String mensaje) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", mensaje);
+		context.addMessage(null, facesMessage);
+	}
 }
-
-private void mostrarMensajeError(String mensaje) {
-    FacesContext context = FacesContext.getCurrentInstance();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", mensaje);
-    context.addMessage(null, facesMessage);
-}
-}
-

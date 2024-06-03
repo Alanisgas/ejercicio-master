@@ -1,4 +1,5 @@
 package ar.com.lemondata.ejercicio.controller;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -16,7 +17,7 @@ import ar.com.lemondata.ejercicio.servicioImpl.ServicioPersonaImpl;
 import java.util.List;
 
 /**
- * @author 
+ * @author
  *
  */
 @Named("altaVehiculoBean")
@@ -32,7 +33,7 @@ public class AltaVehiculoBean extends GenericBean {
 
     @Autowired
     private ServicioVehiculoImpl servicioVehiculo;
-    
+
     @Autowired
     private ServicioPersonaImpl servicioPersona;
 
@@ -40,7 +41,7 @@ public class AltaVehiculoBean extends GenericBean {
     public void init() {
         vehiculo = new Vehiculo();
         personas = servicioPersona.obtenerTodasLasPersonas();
-       
+
     }
 
     public String getTitulo() {
@@ -66,30 +67,28 @@ public class AltaVehiculoBean extends GenericBean {
     public void setPersonas(List<Persona> personas) {
         this.personas = personas;
     }
-  
 
     public Long getPropietarioId() {
         return propietarioId;
     }
-
 
     public void guardarVehiculo() {
         try {
             vehiculo.getColor();
             if (vehiculo.getPropietario() != null) {
                 servicioVehiculo.guardarVehiculo(vehiculo);
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Vehículo guardado con éxito", null));
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Vehículo guardado con éxito", null));
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe seleccionar un propietario", null));
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe seleccionar un propietario", null));
             }
         } catch (Exception e) {
-          
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al guardar el vehículo", null));
-            
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al guardar el vehículo", null));
+
         }
     }
-    
+
 }

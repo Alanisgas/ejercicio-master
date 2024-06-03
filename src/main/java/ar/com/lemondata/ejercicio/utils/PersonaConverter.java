@@ -1,4 +1,5 @@
 package ar.com.lemondata.ejercicio.utils;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -10,8 +11,6 @@ import org.springframework.web.jsf.FacesContextUtils;
 
 import ar.com.lemondata.ejercicio.entity.Persona;
 import ar.com.lemondata.ejercicio.servicio.ServicioPersona;
-
-
 
 @SuppressWarnings("rawtypes")
 @FacesConverter(value = "personaConverter", forClass = Persona.class)
@@ -28,10 +27,11 @@ public class PersonaConverter implements Converter {
             try {
                 Long id = Long.valueOf(value);
                 return getServicioPersona(context).buscarPersonaXId(id);
-            }catch (NumberFormatException e) {
-            // Mostrar un mensaje de error en la interfaz
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversión Error", "No es un ID válido");
-            FacesContext.getCurrentInstance().addMessage(component.getClientId(), msg);
+            } catch (NumberFormatException e) {
+                // Mostrar un mensaje de error en la interfaz
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversión Error",
+                        "No es un ID válido");
+                FacesContext.getCurrentInstance().addMessage(component.getClientId(), msg);
             }
         }
         return null;

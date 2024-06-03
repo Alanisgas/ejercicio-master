@@ -1,28 +1,75 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
-
-    <p:menu style="border: none; background: #7ec977; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px;">
-        <p:submenu label="Personas" icon="pi pi-users">
-            <p:menuitem value="Alta de Persona" outcome="altaPersona" icon="pi pi-user-plus"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Consulta de Persona" outcome="consultas" icon="pi pi-search"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Modificar Persona" outcome="modificaPersona" icon="pi pi-user-edit"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Eliminar Persona" outcome="eliminarPersona" icon="pi pi-user-minus"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-        </p:submenu>
-        <p:submenu label="Vehiculos" icon="pi pi-car">
-            <p:menuitem value="Alta de Vehiculos" outcome="altaVehiculo" icon="pi pi-plus"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Consulta Vehiculos" outcome="consultaV" icon="pi pi-search"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Modificar Vehiculos" outcome="modificaVehiculo" icon="pi pi-pencil"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-            <p:menuitem value="Eliminar Vehiculos" outcome="eliminarVehiculo" icon="pi pi-trash"
-                onclick="PF('blocker').show()" oncomplete="PF('blocker').hide()" />
-        </p:submenu>
-    </p:menu>
-
+<ui:composition
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+>
+  <p:menu
+    style="
+      border: none;
+      background: #7ec977;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    "
+  >
+    <p:submenu label="Personas" icon="pi pi-users">
+      <p:menuitem
+        value="Alta de Persona"
+        outcome="altaPersona"
+        icon="pi pi-user-plus"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Consulta de Persona"
+        outcome="consultas"
+        icon="pi pi-search"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Modificar Persona"
+        outcome="modificaPersona"
+        icon="pi pi-user-edit"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Eliminar Persona"
+        outcome="eliminarPersona"
+        icon="pi pi-user-minus"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+    </p:submenu>
+    <p:submenu label="Vehiculos" icon="pi pi-car">
+      <p:menuitem
+        value="Alta de Vehiculos"
+        outcome="altaVehiculo"
+        icon="pi pi-plus"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Consulta Vehiculos"
+        outcome="consultaV"
+        icon="pi pi-search"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Modificar Vehiculos"
+        outcome="modificaVehiculo"
+        icon="pi pi-pencil"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+      <p:menuitem
+        value="Eliminar Vehiculos"
+        outcome="eliminarVehiculo"
+        icon="pi pi-trash"
+        onclick="PF('blocker').show()"
+        oncomplete="PF('blocker').hide()"
+      />
+    </p:submenu>
+  </p:menu>
 </ui:composition>

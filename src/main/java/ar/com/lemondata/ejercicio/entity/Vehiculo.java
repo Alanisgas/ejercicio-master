@@ -35,7 +35,7 @@ public class Vehiculo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "propietario_id", nullable = false)
     private Persona propietario;
-    
+
     public Vehiculo() {
     }
 
@@ -104,4 +104,5 @@ public class Vehiculo implements Serializable {
     public void setPropietario(Persona propietario) {
         this.propietario = propietario;
     }
+
 }

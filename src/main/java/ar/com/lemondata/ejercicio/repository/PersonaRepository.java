@@ -24,6 +24,6 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 	
 	public List<DatosPersona> findAllProjectedBy();
 	
-	List<Persona> findByNombre(String nombre);
+    List<Persona> findByNombreContainingIgnoreCase(String nombre);
 
 }

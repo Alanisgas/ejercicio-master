@@ -3,20 +3,17 @@ package ar.com.lemondata.ejercicio.controller;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import ar.com.lemondata.ejercicio.entity.Persona;
 import ar.com.lemondata.ejercicio.servicioImpl.ServicioPersonaImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 @Named("busquedaPersonaBean")
 @ViewScoped
 public class BusquedaPersonaBean extends GenericBean implements Serializable {
-
-    private static final Logger logger = LoggerFactory.getLogger(BusquedaPersonaBean.class);
 
     private String nombre;
     private List<Persona> resultados;
@@ -26,7 +23,6 @@ public class BusquedaPersonaBean extends GenericBean implements Serializable {
 
     @PostConstruct
     private void init() {
-        logger.info("Inicializando bean de búsqueda de personas");
         nombre = "";
         resultados = null;
     }
@@ -48,8 +44,12 @@ public class BusquedaPersonaBean extends GenericBean implements Serializable {
     }
 
     public void consultarPersona() {
-        
         resultados = servicio.buscarPersonaXNombre(nombre);
+        if (resultados.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Persona no encontrada",
+                            "No se encontró ninguna persona con el nombre proporcionado."));
+        }
     }
-    
+
 }

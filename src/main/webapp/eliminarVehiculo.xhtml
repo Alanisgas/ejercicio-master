@@ -1,39 +1,75 @@
-<ui:composition template="template.xhtml"
+<ui:composition
+  template="template.xhtml"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://xmlns.jcp.org/jsf/html"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:p="http://primefaces.org/ui">
+  xmlns:p="http://primefaces.org/ui"
+>
   <ui:define name="content">
-
-    <p:panel id="panelEliminacion" header="#{eliminarVehiculoBean.titulo}"
-             style="text-align: center;">
-      <h:panelGrid columns="3" cellpadding="4"
-                   style="margin-left: auto; margin-right: auto;">
+    <p:panel
+      id="panelEliminacion"
+      header="#{eliminarVehiculoBean.titulo}"
+      style="text-align: center"
+    >
+      <h:panelGrid
+        columns="3"
+        cellpadding="4"
+        style="margin-left: auto; margin-right: auto"
+      >
         <p:outputLabel value="Vehículo: " />
-        <p:selectOneMenu id="vehiculoSelect" value="#{eliminarVehiculoBean.idSeleccionado}"
-                         required="true">
+        <p:selectOneMenu
+          id="vehiculoSelect"
+          value="#{eliminarVehiculoBean.idSeleccionado}"
+          required="true"
+          label="Seleccione un valor"
+        >
           <f:selectItem itemLabel="Seleccione" itemValue="" />
-          <f:selectItems value="#{eliminarVehiculoBean.datosCombo}"
-                         var="vehiculo" itemLabel="#{vehiculo.formatoCombo}"
-                         itemValue="#{vehiculo.id}" />
+          <f:selectItems
+            value="#{eliminarVehiculoBean.datosCombo}"
+            var="vehiculo"
+            itemLabel="#{vehiculo.formatoCombo}"
+            itemValue="#{vehiculo.id}"
+          />
           <p:ajax event="change" update="panelEliminacion" />
         </p:selectOneMenu>
 
-        <p:commandButton value="Eliminar" styleClass="classBlock"
-                         oncomplete="PF('confirmDialog').show()"
-                         update="panelEliminacion">
-          <f:param name="combo" value="true" />
+        <p:commandButton
+          value="Eliminar"
+          styleClass="classBlock"
+          update="panelEliminacion"
+          process="@form"
+          actionListener="#{eliminarVehiculoBean.verificarSeleccion}"
+          oncomplete="if ('#{not empty eliminarVehiculoBean.idSeleccionado}') PF('confirmDialog').show();"
+        >
         </p:commandButton>
       </h:panelGrid>
 
-      <p:confirmDialog widgetVar="confirmDialog" message="¿Desea eliminar el vehículo seleccionado?" header="Confirmación" severity="alert">
-        <p:commandButton value="Sí" oncomplete="PF('confirmDialog').hide()" action="#{eliminarVehiculoBean.eliminarVehiculo}" update="panelEliminacion"/>
+      <p:confirmDialog
+        widgetVar="confirmDialog"
+        message="¿Desea eliminar el vehículo seleccionado?"
+        header="Confirmación"
+        severity="alert"
+      >
+        <p:commandButton
+          value="Sí"
+          oncomplete="PF('confirmDialog').hide()"
+          action="#{eliminarVehiculoBean.eliminarVehiculo}"
+          update="panelEliminacion"
+        />
         <p:commandButton value="No" oncomplete="PF('confirmDialog').hide()" />
       </p:confirmDialog>
-
+      <p:toolbar>
+        <p:toolbarGroup align="right">
+          <p:commandButton
+            value="Volver"
+            immediate="true"
+            styleClass="classBlock"
+            action="#{altaPersonaBean.volver}"
+          />
+        </p:toolbarGroup>
+      </p:toolbar>
       <p:messages id="messages" />
-
     </p:panel>
   </ui:define>
 </ui:composition>

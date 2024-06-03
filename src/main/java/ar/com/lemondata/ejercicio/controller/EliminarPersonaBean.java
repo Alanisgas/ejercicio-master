@@ -54,20 +54,24 @@ public class EliminarPersonaBean extends GenericBean {
     public void setDatosCombo(List<DatosPersona> datosCombo) {
         this.datosCombo = datosCombo;
     }
+
     public void eliminarPersona() {
         if (idSeleccionado != null) {
             try {
                 servicio.eliminarPersona(idSeleccionado);
                 setDatosCombo(servicio.obtenerDatosComboPersona());
                 setIdSeleccionado(null);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Persona eliminada con éxito", null));
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Persona eliminada con éxito", null));
             } catch (Exception e) {
                 e.printStackTrace();
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar la persona", null));
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar la persona", null));
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione una persona", null));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Seleccione una persona", null));
         }
     }
- 
+
 }

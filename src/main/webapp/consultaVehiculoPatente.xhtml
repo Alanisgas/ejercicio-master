@@ -1,54 +1,78 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Mi Aplicación</title>
-        <h:outputStylesheet library="css" name="styles.css" />
-    </h:head>
+<ui:composition
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:p="http://primefaces.org/ui"
+>
+  <h:head>
+    <title>Mi Aplicación</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+  </h:head>
 
-    <h:form id="consultaForm">
-        <p:panel header="Consulta Patente" style="text-align: center;">
-            <h:panelGrid columns="2" cellpadding="4" style="margin-left: auto; margin-right: auto;">
-                <p:outputLabel value="Buscar por Patente: " for="patenteInput"/>
-                <p:inputText id="patenteInput" value="#{busquedaVehiculoBean.patente}" />
-            </h:panelGrid>
-        </p:panel>
+  <p:panel header="Consulta Patente" style="text-align: center">
+    <h:panelGrid
+      columns="2"
+      cellpadding="4"
+      style="margin-left: auto; margin-right: auto"
+    >
+      <p:outputLabel value="Buscar por Patente: " for="patenteInput" />
+      <p:inputText id="patenteInput" value="#{busquedaVehiculoBean.patente}" />
+    </h:panelGrid>
+  </p:panel>
 
-        <h:panelGrid id="resultados" columns="3" rendered="#{not empty busquedaVehiculoBean.resultados}">
-            <p:dataTable var="vehiculo" value="#{busquedaVehiculoBean.resultados}">
-                <p:column headerText="Patente">
-                    <h:outputText value="#{vehiculo.patente}" />
-                </p:column>
-                <p:column headerText="Año">
-                    <h:outputText value="#{vehiculo.anio}" />
-                </p:column>
-                <p:column headerText="Marca">
-                    <h:outputText value="#{vehiculo.marca}" />
-                </p:column>
-            
-                <p:column headerText="Modelo">
-                    <h:outputText value="#{vehiculo.modelo}" />
-                </p:column>
-                <p:column headerText="Color">
-                    <h:outputText value="#{vehiculo.color}" />
-                </p:column>
-                <p:column headerText="Tipo de Uso">
-                    <h:outputText value="#{vehiculo.tipoUso}" />
-                </p:column>
-                <p:column headerText="Propietario">
-    <h:outputText value="#{vehiculo.propietario.nombre}" />
-</p:column>
-            </p:dataTable>
-        </h:panelGrid>
+  <h:panelGrid
+    id="resultados"
+    columns="3"
+    rendered="#{not empty busquedaVehiculoBean.resultados}"
+  >
+    <p:dataTable var="vehiculo" value="#{busquedaVehiculoBean.resultados}">
+      <p:column headerText="Patente">
+        <h:outputText value="#{vehiculo.patente}" />
+      </p:column>
+      <p:column headerText="Año">
+        <h:outputText value="#{vehiculo.anio}" />
+      </p:column>
+      <p:column headerText="Marca">
+        <h:outputText value="#{vehiculo.marca}" />
+      </p:column>
+      <p:column headerText="Modelo">
+        <h:outputText value="#{vehiculo.modelo}" />
+      </p:column>
+      <p:column headerText="Color">
+        <h:outputText value="#{vehiculo.color}" />
+      </p:column>
+      <p:column headerText="Tipo de Uso">
+        <h:outputText value="#{vehiculo.tipoUso}" />
+      </p:column>
+      <p:column headerText="Propietario">
+        <h:outputText value="#{vehiculo.propietario.nombre}" />
+      </p:column>
+    </p:dataTable>
+  </h:panelGrid>
 
-        <p:toolbar>
-            <p:toolbarGroup align="right">
-                <h:commandButton value="Buscar" styleClass="buttonStyle" action="#{busquedaVehiculoBean.consultarVehiculo}" />
-                <p:spacer width="20" />
-                <h:commandButton value="Volver" immediate="true" styleClass="buttonStyle" action="#{consultaPersonaBean.volver}" />
-            </p:toolbarGroup>
-        </p:toolbar>
-    </h:form>
+  <p:toolbar>
+    <p:toolbarGroup align="right">
+      <h:commandButton
+        value="Buscar"
+        styleClass="buttonStyle"
+        action="#{busquedaVehiculoBean.consultarVehiculo}"
+        update="@form "
+      />
+      <p:spacer width="20" />
+      <h:commandButton
+        value="Volver"
+        immediate="true"
+        styleClass="buttonStyle"
+        action="#{consultaPersonaBean.volver}"
+      />
+    </p:toolbarGroup>
+  </p:toolbar>
+
+  <p:messages
+    id="messages"
+    showDetail="true"
+    autoUpdate="true"
+    closable="true"
+  />
 </ui:composition>
